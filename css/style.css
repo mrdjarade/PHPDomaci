@@ -1,16 +1,19 @@
-* {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    color: black;
-}
-
 .padding-container {
     padding: 40px 100px;
 }
 
+.prozor-kurs {
+    background-color: rgb(234, 250, 255);
+    padding: 20px 40px;
+    width: 650px;
+    display: none;
+}
+
 .hidden-kurs {
-    padding: 0px 100px;
-    width: 600px;
-    background-color: rgb(232, 252, 255);
+    display: block;
+}
+
+.prozor-kurs input,
+.prozor-kurs textarea {
+    margin-bottom: 20px;
 }

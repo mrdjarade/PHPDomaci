@@ -18,21 +18,22 @@ include "broker.php";
     <div class="padding-container">
         <h1>Dobrodošli</h1>
         <p>Ovo je aplikacija o kursevima, koje različiti administratori mogu da kreiraju, menjaju, brišu i pretražuju.</p>
-        <button type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
-    </div>
+        <button style="margin-bottom:30px;" type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
 
-    <div class="hidden-kurs">
-        <form>
-            <div class="form-group">
-                <label>Naziv kursa</label>
-                <input type="text" class="form-control" placeholder="Unesite naziv kursa...">
-            </div>
-            <div class="form-group">
-                <label>Kratak opis kursa</label>
-                <input type="text" class="form-control" placeholder="Unesite kratak opis kursa...">
-            </div>
-            <button type="submit" class="btn btn-primary">Dodaj</button>
-        </form>
+        <div class="prozor-kurs">
+            <form>
+                <div class="form-group">
+                    <label>Naziv kursa</label>
+                    <input type="text" class="form-control" placeholder="Unesite naziv kursa...">
+                </div>
+                <div class="form-group">
+                    <label>Kratak opis kursa</label>
+                    <textarea type="text" class="form-control" placeholder="Unesite kratak opis kursa..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Dodaj</button>
+            </form>
+        </div>
+
     </div>
 
     <div class="padding-container">
@@ -72,5 +73,7 @@ include "broker.php";
         </table>
     </div>
     
+    <script src="js/script.js"></script>
+
 </body>
 </html>
