@@ -21,6 +21,20 @@ include "broker.php";
         <button type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
     </div>
 
+    <div class="hidden-kurs">
+        <form>
+            <div class="form-group">
+                <label>Naziv kursa</label>
+                <input type="text" class="form-control" placeholder="Unesite naziv kursa...">
+            </div>
+            <div class="form-group">
+                <label>Kratak opis kursa</label>
+                <input type="text" class="form-control" placeholder="Unesite kratak opis kursa...">
+            </div>
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </form>
+    </div>
+
     <div class="padding-container">
         <table class="table">
             <thead>

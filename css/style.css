@@ -8,3 +8,9 @@
 .padding-container {
     padding: 40px 100px;
 }
+
+.hidden-kurs {
+    padding: 0px 100px;
+    width: 600px;
+    background-color: rgb(232, 252, 255);
+}
