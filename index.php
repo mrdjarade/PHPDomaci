@@ -1,6 +1,13 @@
 <?php
 
-include "broker.php";
+require "broker.php";
+require "model/Kurs.php";
+
+session_start();
+if(!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
 
 ?>
 

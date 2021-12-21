@@ -7,13 +7,14 @@ session_start();
 if(isset($_POST["username"]) && isset($_POST["password"])) {
     $user = $_POST["username"];
     $pass = $_POST["password"];
-    $user = new korisnik(null,$user,$pass);
-    $odg = Korisnik::loginUser($user,$conn);
+    $kor = new Korisnik(1,$user,$pass);
+
+    $odg = Korisnik::loginUser($kor,$conn);
 
     if($odg->num_rows == 1) {
         //echo "Postoji korisnik";
-        $_SESSION["user_id"] = $user->id;
-        header('Location: index.php');
+        $_SESSION["user_id"] = $kor->id;
+        header("Location: index.php");
         exit();
     } else {
         //echo "Ne postoji korisnik";
@@ -41,14 +42,14 @@ if(isset($_POST["username"]) && isset($_POST["password"])) {
         <p>Unesite korisničko ime i lozinku za logovanje.</p>
     </div>
 
-    <form method="POST" action="#">
+    <form method="POST" action="">
         <div class="form-group">
             <label>Korisničko ime</label>
             <input type="text" name="username" class="form-control" placeholder="Korisničko ime..." required>
         </div>
         <div class="form-group">
             <label>Lozinka</label>
-            <input type="password" name="password" class="form-control" placeholder="Lozina..." required>
+            <input type="password" name="password" class="form-control" placeholder="Lozinka..." required>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>

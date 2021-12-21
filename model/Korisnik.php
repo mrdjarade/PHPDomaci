@@ -11,8 +11,8 @@ class Korisnik {
         $this->password=$password;
     }
 
-    public static function loginUser($user,$conn) {
-        $sql = "SELECT * FROM admin WHERE username='$user->username' and password='$user->password'";
+    public static function loginUser($kor,$conn) {
+        $sql = "SELECT * FROM admin WHERE username='$kor->username' and password='$kor->password'";
         return $conn->query($sql);
     }
 
