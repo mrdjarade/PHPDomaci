@@ -6,4 +6,4 @@ $("#novi-kurs").click(function (e) {
 $("#dodajNovi").submit(function (e) {
     e.preventDefault();
     console.log("Dodavanje");
-})
+});
