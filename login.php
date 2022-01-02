@@ -13,15 +13,16 @@ if(isset($_POST["username"]) && isset($_POST["password"])) {
 
     if($odg->num_rows == 1) {
         //echo "Postoji korisnik";
-        $_SESSION["user_id"] = $kor->id;
+        $row = $odg->fetch_row();
+        $_SESSION['adminID'] = $row[0];
         header("Location: index.php");
         exit();
     } else {
         //echo "Ne postoji korisnik";
         echo  "<script> alert('Pogresno korisničko ime ili lozinka') </script>";
+        header("Location: login.php");
     }
 }
-
 
 ?>
 
