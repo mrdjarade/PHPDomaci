@@ -27,7 +27,6 @@ if($svi->num_rows == 0) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -39,7 +38,12 @@ if($svi->num_rows == 0) {
     <div class="padding-container">
         <h1>Dobrodošli</h1>
         <p>Ovo je aplikacija o kursevima, koje različiti administratori mogu da kreiraju, menjaju, brišu i pretražuju.</p>
-        <button style="margin-bottom:30px;" type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
+        <div style="display: flex; align-items:center">
+            <button style="margin-right:20px; margin-bottom:30px; padding:0px; width:100px; height:40px" type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
+            <button formmethod="post" style="margin-right:20px; margin-bottom:30px; padding:0px; width:50px; height:40px" type ="button" id="izmeni-kurs" class="btn btn-warning btn-sm btnIzmeni" value="Izmeni"><i class="fas fa-pen"></i></button>
+            <button formmethod="post" style="margin-right:20px; margin-bottom:30px; padding:0px; width:50px; height:40px" type ="button" id="obrisi-kurs" class="btn btn-danger btn-sm btnIzbrisi" value="Obrisi"><i class="fas fa-trash"></i></button>
+            <input style="margin-right:20px; width:200px; display:inline; margin-bottom:30px" type="text" class="form-control" id="search" placeholder="Pretražite kurseve...">
+        </div>
 
         <div class="prozor-kurs">
             <form action="#" method="POST" id="dodajNovi">
@@ -52,6 +56,20 @@ if($svi->num_rows == 0) {
                     <textarea name="opis" type="text" class="form-control" placeholder="Unesite kratak opis kursa..."></textarea>
                 </div>
                 <button id="btnDodaj" formmethod="POST" type="submit" class="btn btn-primary">Dodaj</button>
+            </form>
+        </div>
+
+        <div class="izmeni-kurs">
+            <form action="#" method="POST" id="izmeniKurs">
+                <div class="form-group">
+                    <label>Naziv kursa</label>
+                    <input name="naziv" id="naziv-input" type="text" class="form-control" placeholder="Unesite naziv kursa...">
+                </div>
+                <div class="form-group">
+                    <label>Kratak opis kursa</label>
+                    <textarea name="opis" id="opis-input" type="text" class="form-control" placeholder="Unesite kratak opis kursa..."></textarea>
+                </div>
+                <button id="btnIzmeni" formmethod="POST" type="submit" class="btn btn-warning">Izmeni</button>
             </form>
         </div>
 
@@ -78,8 +96,7 @@ if($svi->num_rows == 0) {
                     <td><?php echo $row["opis"] ?></td>
                     <td><?php echo $row["autor"] ?></td>
                     <td>
-                        <button formmethod="POST" type="button" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
-                        <button formmethod="POST" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        <input type="radio" name="btnRadio" value="<?php echo $row["kursID"]?>">
                     </td>
                 </tr>
                 <?php
