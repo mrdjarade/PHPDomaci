@@ -39,8 +39,8 @@ class Kurs {
         return $conn->query($sql);
     }
 
-    public function update($conn) {
-        $sql =  "UPDATE kurs SET naziv='$this->naziv', opis='$this->opis', autor = '$this->autor'";
+    public function update($id, $conn) {
+        $sql =  "UPDATE kurs SET naziv='$this->naziv', opis='$this->opis' WHERE kursID=$id";
         return $conn->query($sql);
     }
 
