@@ -1,5 +1,5 @@
 .padding-container {
-    padding: 40px 100px;
+    padding: 30px 100px;
 }
 
 .prozor-kurs {
@@ -10,10 +10,27 @@
 }
 
 .hidden-kurs {
-    display: block;
+    display: block !important;
 }
 
 .prozor-kurs input,
 .prozor-kurs textarea {
     margin-bottom: 20px;
+}
+
+.izmeni-kurs {
+    background-color: rgb(234, 250, 255);
+    padding: 20px 40px;
+    width: 650px;
+    display: none;
+}
+
+.izmeni-kurs input,
+.izmeni-kurs textarea {
+    margin-bottom: 20px;
+}
+
+#search {
+    display: inline;
+    width: 100px;
 }
