@@ -40,19 +40,18 @@ $("#dodajNovi").submit(function (e) {
 
 // obrada brisanja postojeceg kursa
 
-$("#obrisi-kurs").click(function (e) {
+$(".obrisi-kurs-button").click(function (e) {
     e.preventDefault();
-    console.log("Zapocetno brisanje");
 
-    const oznaceno = $("input[name=btnRadio]:checked");
+    let id = $(this).data('id');
 
-    let td = oznaceno.closest('tr');
+    let td = $("#" + id).closest('tr');
 
     request = $.ajax({
         url: 'controller/izbrisi.php',
         type: 'post',
         data: {
-            'id': oznaceno.val()
+            id: id
         }
     });
 
@@ -60,38 +59,55 @@ $("#obrisi-kurs").click(function (e) {
         if (res === 'Success') {
             td.remove();
             alert("Kurs je obrisan.");
-            console.log("Obrisan.");
-            console.log(res, textStatus);
+            //console.log("Obrisan.");
+            //console.log(res, textStatus);
             location.reload(true);
         } else {
-            console.log("Kurs nije obrisan. ");
+            //console.log("Kurs nije obrisan. ");
         }
     });
 });
 
 // prikazivanje forme za izmenu kursa
 
-$("#izmeni-kurs").click(function () {
+$(".izmeni-kurs-button").click(function () {
     $(".izmeni-kurs").toggleClass("hidden-kurs");
+    let id = $(this).data('id');
+    let naziv = $("#" + id).children("td[data-target=naziv]").text();
+    let opis = $("#" + id).children("td[data-target=opis]").text();
+    let autor = $("#" + id).children("td[data-target=autor]").text();
 
-    const oznaceno = $("input[name=btnRadio]:checked");
+    $("#id-input").val(id);
+    $("#naziv-input").val(naziv);
+    $("#opis-input").val(opis);
+    $("#autor-input").val(autor);
+});
 
-    request = $.ajax({
-        url: 'controller/get.php',
+// update fja
+
+$("#btnIzmeni").click(function (e) {
+    e.preventDefault();
+    let id = $("#id-input").val();
+    let naziv = $("#naziv-input").val();
+    let opis = $("#opis-input").val();
+    let autor = $("#autor-input").val();
+
+    let request = $.ajax({
+        url: 'controller/izmeni.php',
         type: 'post',
         data: {
-            'id': oznaceno.val()
-        },
-        dataType: 'json'
+            id: id,
+            naziv: naziv,
+            opis: opis,
+            autor: autor
+        }
     });
 
-    request.done(function (res, textStatus, jqXHR) {
-        $("#naziv-input").val(res[0]['naziv'].trim());
-        $("#opis-input").val(res[0]['opis'].trim());
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Doslo je do greske." + textStatus + errorThrown);
+    request.done(function (response, textStatus, jqXHR) {
+        if (response === 'Success') {
+            alert("Kurs je izmenjen.");
+            location.reload(true);
+        }
     });
 });
 
