@@ -40,8 +40,6 @@ if($svi->num_rows == 0) {
         <p>Ovo je aplikacija o kursevima, koje različiti administratori mogu da kreiraju, menjaju, brišu i pretražuju.</p>
         <div style="display: flex; align-items:center">
             <button style="margin-right:20px; margin-bottom:30px; padding:0px; width:100px; height:40px" type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
-            <button formmethod="post" style="margin-right:20px; margin-bottom:30px; padding:0px; width:50px; height:40px" type ="button" id="izmeni-kurs" class="btn btn-warning btn-sm btnIzmeni" value="Izmeni"><i class="fas fa-pen"></i></button>
-            <button formmethod="post" style="margin-right:20px; margin-bottom:30px; padding:0px; width:50px; height:40px" type ="button" id="obrisi-kurs" class="btn btn-danger btn-sm btnIzbrisi" value="Obrisi"><i class="fas fa-trash"></i></button>
             <input style="margin-right:20px; width:200px; display:inline; margin-bottom:30px" type="text" class="form-control" id="search" placeholder="Pretražite kurseve...">
         </div>
 
@@ -62,12 +60,20 @@ if($svi->num_rows == 0) {
         <div class="izmeni-kurs">
             <form action="#" method="POST" id="izmeniKurs">
                 <div class="form-group">
+                    <label>KursID</label>
+                    <input name="id" id="id-input" disabled type="text" class="form-control" value="">
+                </div>
+                <div class="form-group">
                     <label>Naziv kursa</label>
                     <input name="naziv" id="naziv-input" type="text" class="form-control" placeholder="Unesite naziv kursa...">
                 </div>
                 <div class="form-group">
                     <label>Kratak opis kursa</label>
                     <textarea name="opis" id="opis-input" type="text" class="form-control" placeholder="Unesite kratak opis kursa..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Autor</label>
+                    <input name="autor" id="autor-input" disabled type="text" class="form-control">
                 </div>
                 <button id="btnIzmeni" formmethod="POST" type="submit" class="btn btn-warning">Izmeni</button>
             </form>
@@ -90,13 +96,14 @@ if($svi->num_rows == 0) {
                 <?php
                     while($row = $svi->fetch_array()):
                 ?>
-                <tr>
+                <tr id="<?php echo $row["kursID"]?>">
                     <td scope="row"><?php echo $row["kursID"] ?></td>
-                    <td><?php echo $row["naziv"] ?></td>
-                    <td><?php echo $row["opis"] ?></td>
-                    <td><?php echo $row["autor"] ?></td>
+                    <td data-target="naziv"><?php echo $row["naziv"] ?></td>
+                    <td data-target="opis"><?php echo $row["opis"] ?></td>
+                    <td data-target="autor"><?php echo $row["autor"] ?></td>
                     <td>
-                        <input type="radio" name="btnRadio" value="<?php echo $row["kursID"]?>">
+                        <a href="#" style="margin-right:10px;" class="btn btn-warning btn-sm izmeni-kurs-button" data-id="<?php echo $row['kursID']; ?>"><i class="fas fa-pen"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm obrisi-kurs-button" data-id="<?php echo $row['kursID']; ?>"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php
