@@ -8,7 +8,7 @@ if(isset($_POST["id"])) {
     $status = $kurs->izbrisiID($conn);
     if ($status){
         echo 'Success';
-    }else{
+    } else{
         echo 'Failed';
     }
 }
