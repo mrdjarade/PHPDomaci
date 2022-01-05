@@ -12,28 +12,26 @@ $("#dodajNovi").submit(function (e) {
     console.log("Dodavanje");
     const $form = $(this);
     const $input = $form.find('input, textarea, button, select');
-    const serijalizacija = $form.serialize();
-    console.log(serijalizacija);
+    const podaci = $form.serialize();
     $input.prop('disabled', true);
 
-    request = $.ajax({
+    let request = $.ajax({
         url: 'controller/dodaj.php',
         type: 'POST',
-        data: serijalizacija
+        data: podaci
     });
 
-    request.done(function (res, textStatus, jqXHR) {
-        if (res === 'Success') {
+    request.done(function (response) {
+        if (response === 'Success') {
             alert("Novi kurs je uspešno dodat.");
-            console.log("Dodat je novi kurs");
             location.reload(true);
         } else {
-            console.log("Novi kurs nije dodat. " + res);
+            console.log("Novi kurs nije dodat. " + response);
         }
     });
 
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-        console.error("Desila se greska -> " + errorThrown);
+    request.fail(function () {
+        console.error("Desila se greska.");
     });
 
 });
@@ -47,7 +45,7 @@ $(".obrisi-kurs-button").click(function (e) {
 
     let td = $("#" + id).closest('tr');
 
-    request = $.ajax({
+    let request = $.ajax({
         url: 'controller/izbrisi.php',
         type: 'post',
         data: {
@@ -55,15 +53,13 @@ $(".obrisi-kurs-button").click(function (e) {
         }
     });
 
-    request.done(function (res, textStatus, jqXHR) {
-        if (res === 'Success') {
+    request.done(function (response) {
+        if (response === 'Success') {
             td.remove();
             alert("Kurs je obrisan.");
-            //console.log("Obrisan.");
-            //console.log(res, textStatus);
             location.reload(true);
         } else {
-            //console.log("Kurs nije obrisan. ");
+            console.log("Kurs nije obrisan.");
         }
     });
 });
@@ -103,7 +99,7 @@ $("#btnIzmeni").click(function (e) {
         }
     });
 
-    request.done(function (response, textStatus, jqXHR) {
+    request.done(function (response) {
         if (response === 'Success') {
             alert("Kurs je izmenjen.");
             location.reload(true);
@@ -127,4 +123,53 @@ $("#search").on('keyup', function (i) {
         }
     });
 
+});
+
+// sortiranje tabele
+
+function sortiraj() {
+    let tabela = document.querySelector(".table");
+    let redovi = tabela.rows;
+
+    console.log("Pokrenuta funkcija za sortiranje."); // provera
+
+    let menjaj = true;
+    let promena;
+    let x, y, i;
+    let brojac = 0;
+    let redosled = "asc";
+    while (menjaj) {
+        menjaj = false;
+        for (i = 1; i < (redovi.length - 1); i++) {
+            promena = false;
+            x = redovi[i].getElementsByTagName("td")[1];
+            y = redovi[i + 1].getElementsByTagName("td")[1];
+            if (redosled == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    promena = true;
+                    break;
+                }
+            } else if (redosled == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    promena = true;
+                    break;
+                }
+            }
+        }
+        if (promena) {
+            redovi[i].parentNode.insertBefore(redovi[i + 1], redovi[i]);
+            menjaj = true;
+            brojac++;
+        } else {
+            if (brojac == 0 && redosled == "asc") {
+                redosled = "desc";
+                menjaj = true;
+            }
+        }
+    }
+}
+
+$("#sortiraj").click(function (e) {
+    e.preventDefault();
+    sortiraj();
 });

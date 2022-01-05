@@ -40,6 +40,7 @@ if($svi->num_rows == 0) {
         <p>Ovo je aplikacija o kursevima, koje različiti administratori mogu da kreiraju, menjaju, brišu i pretražuju.</p>
         <div style="display: flex; align-items:center">
             <button style="margin-right:20px; margin-bottom:30px; padding:0px; width:100px; height:40px" type="button" id="novi-kurs" class="btn btn-success">Novi kurs</button>
+            <button style="margin-right:20px; margin-bottom:30px; padding:0px; width:40px; height:40px" type="button" class="btn btn-info" id="sortiraj"><i class="fas fa-sort"></i></button>
             <input style="margin-right:20px; width:200px; display:inline; margin-bottom:30px" type="text" class="form-control" id="search" placeholder="Pretražite kurseve...">
         </div>
 
@@ -92,7 +93,7 @@ if($svi->num_rows == 0) {
                     <th scope="col">Opcije</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="telo">
                 <?php
                     while($row = $svi->fetch_array()):
                 ?>
