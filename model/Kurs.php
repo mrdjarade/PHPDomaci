@@ -21,8 +21,8 @@ class Kurs {
     public static function pronadjiID($id,$conn) {
         $sql = "SELECT * FROM kurs WHERE kursID=$id";
         $myObj = array();
-        if($msqlObj = $conn->query($sql)) {
-            while($row = $msqlObj->fetch_array(1)){
+        if($rez = $conn->query($sql)) {
+            while($row = $rez->fetch_array(1)){
                 $myObj[]= $row;
             }
         }
@@ -36,11 +36,6 @@ class Kurs {
 
     public static function dodaj($novi,$conn) {
         $sql = "INSERT INTO kurs (naziv,opis,autor) VALUES ('$novi->naziv','$novi->opis', '$novi->autor')";
-        return $conn->query($sql);
-    }
-
-    public function update($id, $conn) {
-        $sql =  "UPDATE kurs SET naziv='$this->naziv', opis='$this->opis' WHERE kursID=$id";
         return $conn->query($sql);
     }
 
