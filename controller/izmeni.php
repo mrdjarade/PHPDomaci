@@ -10,9 +10,9 @@ if(isset($_POST["autor"])) {
     
     $result = mysqli_query($conn, "UPDATE kurs SET naziv='$naziv', opis='$opis' WHERE kursID='$id'");
     if($result) {
-        echo 'Success';
+        echo "Success";
     } else {
-        echo 'Failed';
+        echo "Failed";
     }
 }
 
